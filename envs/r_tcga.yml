@@ -1,0 +1,25 @@
+name: r_tcga
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  # Core
+  - r-base=4.3
+
+  # CRAN packages
+  - r-readxl
+  - r-dplyr
+  - r-ggplot2
+  - r-pheatmap
+
+  # Bioconductor packages
+  - bioconductor-edger
+  - bioconductor-limma
+  - bioconductor-sva
+
+  # System libs (for plots & fonts)
+  - cairo
+  - freetype
+  - libpng
