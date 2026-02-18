@@ -19,11 +19,11 @@ threshold <- 0.1
 median_file <- "batch_median.txt"
 
 if (!file.exists(median_file)) {
-  stop("❌ batch_median.txt not found")
+  stop(" batch_median.txt not found")
 }
 
 median_r2 <- as.numeric(tail(readLines(median_file), 1))
-if (is.na(median_r2)) stop("❌ Cannot parse median R2")
+if (is.na(median_r2)) stop(" Cannot parse median R2")
 
 message("Median R2 = ", median_r2)
 
@@ -57,18 +57,18 @@ stopifnot(all(colnames(expr_norm) == meta$COMPLETE_SAMPLE_ID))
 do_correction <- TRUE
 
 if (median_r2 < threshold) {
-  message("✔ Batch effect below threshold — skipping correction")
+  message("Batch effect below threshold — skipping correction")
   do_correction <- FALSE
 }
 
-if (!"PLATE" %in% colnames(meta)) {
-  message("✔ PLATE column missing — skipping correction")
+if ("PLATE" %in% colnames(meta)) {
+  message("PLATE column missing — skipping correction")
   do_correction <- FALSE
 }
 
 batch <- factor(meta$PLATE)
 if (length(levels(batch)) < 2) {
-  message("✔ Only one batch — skipping correction")
+  message("Only one batch — skipping correction")
   do_correction <- FALSE
 }
 
@@ -78,7 +78,7 @@ if (length(levels(batch)) < 2) {
 
 if (do_correction) {
   
-  message("▶ Applying limma batch correction")
+  message("Applying limma batch correction")
   
   design <- model.matrix(~1, data = meta)
   
@@ -156,4 +156,5 @@ pheatmap(
 )
 
 message("Batch correction step completed successfully")
+
 
