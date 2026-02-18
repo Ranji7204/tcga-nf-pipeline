@@ -1,5 +1,5 @@
 ############################################
-# Merge all regions (FINAL, FIXED)
+# Merge all regions
 ############################################
 
 suppressPackageStartupMessages({
@@ -11,7 +11,7 @@ suppressPackageStartupMessages({
 args <- commandArgs(trailingOnly = TRUE)
 results_dir <- if (length(args) > 0) args[1] else "results"
 
-message("▶ Merging all regions from: ", results_dir)
+message("Merging all regions from: ", results_dir)
 
 # -----------------------------------------
 # 1. Detect valid region directories
@@ -23,11 +23,11 @@ valid_regions <- region_dirs[
     file.exists(file.path(region_dirs, "metadata_batch_corrected.txt"))
 ]
 
-message("✔ Regions detected: ", length(valid_regions))
-message("✔ Regions: ", paste(basename(valid_regions), collapse = ", "))
+message("Regions detected: ", length(valid_regions))
+message("Regions: ", paste(basename(valid_regions), collapse = ", "))
 
 if (length(valid_regions) < 2) {
-  stop("❌ Need at least two regions to merge")
+  stop("Need at least two regions to merge")
 }
 
 # -----------------------------------------
@@ -128,4 +128,5 @@ write.table(
   row.names = FALSE
 )
 
-message("✅ Merge completed successfully")
+message("Merge completed successfully")
+
