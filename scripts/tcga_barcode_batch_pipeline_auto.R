@@ -1,6 +1,5 @@
 ############################################
 # TCGA AUTO-DETECT BARCODE + BATCH CHECK
-# FINAL, NEXTFLOW-SAFE VERSION
 ############################################
 
 #############################
@@ -25,13 +24,13 @@ meta_file <- list.files(pattern = "\\.xlsx$", ignore.case = TRUE)
 expr_file <- list.files(pattern = "\\.txt$",  ignore.case = TRUE)
 
 if (length(meta_file) != 1)
-  stop("❌ Exactly ONE metadata (.xlsx) file must be present")
+  stop("Exactly ONE metadata (.xlsx) file must be present")
 
 if (length(expr_file) != 1)
-  stop("❌ Exactly ONE expression (.txt) file must be present")
+  stop("Exactly ONE expression (.txt) file must be present")
 
-message("📄 Metadata file: ", meta_file)
-message("📊 Expression file: ", expr_file)
+message("Metadata file: ", meta_file)
+message("Expression file: ", expr_file)
 
 #############################
 # 2. Read input data
@@ -59,7 +58,7 @@ count_mat  <- expr[, -(1:3)]
 #############################
 
 if (!"SAMPLE_ID" %in% colnames(meta))
-  stop("❌ Metadata must contain column: SAMPLE_ID")
+  stop("Metadata must contain column: SAMPLE_ID")
 
 meta <- meta %>%
   mutate(SAMPLE_ID_16 = substr(SAMPLE_ID, 1, 16))
@@ -73,7 +72,7 @@ expr_sample_16 <- substr(colnames(count_mat), 1, 16)
 common_samples <- intersect(meta$SAMPLE_ID_16, expr_sample_16)
 
 if (length(common_samples) < 5)
-  stop("❌ Too few common samples after matching")
+  stop("Too few common samples after matching")
 
 meta_filt <- meta %>% filter(SAMPLE_ID_16 %in% common_samples)
 
@@ -207,4 +206,5 @@ write.table(
   row.names = FALSE
 )
 
-message("✅ Batch check + QC completed successfully")
+message("Batch check + QC completed successfully")
+
