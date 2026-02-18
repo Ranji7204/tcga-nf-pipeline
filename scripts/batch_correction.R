@@ -1,5 +1,5 @@
 ############################################
-# Batch correction script (NEXTFLOW SAFE)
+# Batch correction script
 ############################################
 
 suppressPackageStartupMessages({
@@ -97,7 +97,7 @@ if (do_correction) {
 }
 
 #############################
-# 5. Save expression & metadata (ALWAYS)
+# 5. Save expression & metadata
 #############################
 
 write.table(
@@ -117,7 +117,7 @@ write.table(
 )
 
 #############################
-# 6. PCA after batch correction (ALWAYS)
+# 6. PCA after batch correction
 #############################
 
 pca <- prcomp(t(expr_final), scale. = TRUE)
@@ -141,7 +141,7 @@ ggsave(
 )
 
 #############################
-# 7. Heatmap QC (ALWAYS)
+# 7. Heatmap QC 
 #############################
 
 annotation_col <- data.frame(Batch = batch)
@@ -155,4 +155,5 @@ pheatmap(
   filename = "heatmap_after_batch_correction.png"
 )
 
-message("✅ Batch correction step completed successfully")
+message("Batch correction step completed successfully")
+
